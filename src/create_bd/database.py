@@ -65,7 +65,7 @@ def create_db(name):
                     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     "отель_id" INTEGER NOT NULL,
                     "номер_кімнати" INTEGER NOT NULL CHECK("номер_кімнати" > 0), 
-                    "максимальна_кількість" INTEGER NOT NULL CHECK("номер_кімнати" > 0), 
+                    "максимальна_кількість" INTEGER NOT NULL CHECK("максимальна_кількість" > 0), 
                     "вартість_в_грн" REAL NOT NULL CHECK("вартість_в_грн" >= 0),
                 
                     FOREIGN KEY ("отель_id") REFERENCES ОТЕЛЬ (id) ON DELETE CASCADE

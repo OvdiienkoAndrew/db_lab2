@@ -2464,7 +2464,7 @@ def actions(action, root, name_db):
     for widget in root.winfo_children():
         widget.destroy()
 
-    button_back = tk.Button(root, text="Back", command=lambda: admin_menu(root,name_db))
+    button_back = tk.Button(root, text="Back", command=lambda: admin_tables(root,name_db))
     root.update()
     button_back.place(x=10, y=10)
     root.update()
@@ -2502,6 +2502,8 @@ def actions(action, root, name_db):
 
     root.update()
 
+
+
 def admin_menu(root,name_db):
     from src.model.administrator import administrator
 
@@ -2510,6 +2512,52 @@ def admin_menu(root,name_db):
         widget.destroy()
 
     button_back = tk.Button(root, text="Back", command=lambda: administrator(root, name_db))
+    root.update()
+    button_back.place(x=10, y=10)
+    root.update()
+    button_back.place(x=10, y=10)
+    root.update()
+
+    hints = ["Tables","Requests"]
+
+    buttons = []
+
+    buttons.append(tk.Button(root, text=hints[0], command=lambda: admin_tables(root,name_db)))
+    from src.requests.requests import requests
+    buttons.append(tk.Button(root, text=hints[1], command=lambda: requests(root, name_db)))
+
+    root.update()
+
+    for button in buttons:
+        button.place(x=10, y=50)
+
+    root.update()
+
+    empty_height = root.winfo_height() - 20 - button_back.winfo_height()
+
+    for button in buttons:
+        empty_height -= button.winfo_height()
+
+    empty_height /= (len(buttons) + 2)
+
+    helper_height = 20 + button_back.winfo_height()
+
+    root.update()
+
+    for i, button in enumerate(buttons, start=1):
+        button.place(x=(root.winfo_width() - button.winfo_width()) / 2,
+                     y=helper_height + i * empty_height + (i - 1) * button.winfo_height())
+
+    root.update()
+
+def admin_tables(root,name_db):
+    from src.model.administrator import administrator
+
+    root.title(f"Tables")
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    button_back = tk.Button(root, text="Back", command=lambda: admin_menu(root, name_db))
     root.update()
     button_back.place(x=10,y=10)
     root.update()
